@@ -15,8 +15,14 @@ module top(
          z_29,z_28,z_27,z_26,z_25,z_24,z_23,z_22,z_21,z_20,
          z_19,z_18,z_17,z_16,z_15,z_14,z_13,z_12,z_11,z_10,
          z_09,z_08,z_07,z_06,z_05,z_04,z_03,z_02,z_01,z_00;
+         
     assign y = y_temp[30:14];
-    
+    //41 DSP slices implementing the fixed point lo pass filter difference equation
+    //P = A * B + C
+    //A and B are 17 bits
+    //C is 34 bits
+    //P is 35 bits (A * B produces a 34 bit result, summing with a 34 bit number produces a 35 bit result)
+    //A is the input x, B holds the 17 bit coefficient value, taken from hdl_ref_coefficients.txt
     dsp_mac_block z_00_inst(
       .CLK(clk_100MHz),
       .A(x),
